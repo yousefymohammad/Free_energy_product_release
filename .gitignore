@@ -1,0 +1,23 @@
+# Generated MD and WHAM outputs; keep input structures under inputs/.
+/simulations/
+/analysis/
+/release/
+*.tpr
+*.xtc
+*.trr
+*.cpt
+*.edr
+*.log
+mdout.mdp
+\#*\#
+# Local environments and editor/cache files.
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.vscode/
+.DS_Store
+.env
+.env.*
+*.zip
+*.tar.gz

@@ -1,0 +1,58 @@
+;
+;	File 'topol.top' was generated
+;	By user: myousefi (1001639)
+;	On host: compchem9
+;	At date: Tue May  5 13:36:24 2026
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	                    :-) GROMACS - gmx pdb2gmx, 2022.1 (-:
+;	
+;	Executable:   /soft/gromacs/gromacs-v2022.1-8815550e/bin/gmx
+;	Data prefix:  /soft/gromacs/gromacs-v2022.1-8815550e
+;	Working dir:  /scratch/global_1/myousefi/ctal/chs_dimer
+;	Command line:
+;	  gmx pdb2gmx -f protein_chl.pdb -o chs_dimer.gro -ignh
+;	Force field was read from current directory or a relative path - path added.
+;
+
+; Include forcefield parameters
+#include "../amber14sb_parmbsc1.ff/forcefield.itp"
+#include "../molecules/CTAL_GMX.itp"
+; Include chain topologies
+#include "../molecules/topol_Protein_chain_A.itp"
+#include "../molecules/topol_Protein_chain_B.itp"
+#include "../molecules/choline.itp"
+#include "../molecules/cl.itp"
+#include "../molecules/eth.itp"
+
+; Include water topology
+#include "../amber14sb_parmbsc1.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "../amber14sb_parmbsc1.ff/ions.itp"
+
+[ system ]
+; Name
+dimer_mo in water
+
+[ molecules ]
+; Compound        #mols
+Protein_chain_A     1
+Protein_chain_B     1
+CTAL                2
+CHO                1266
+CLO                1266
+ETH               2532
+SOL         16610
+NA               10
+
+

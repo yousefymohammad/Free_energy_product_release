@@ -1,0 +1,23 @@
+name: Check workflow files
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Check shell syntax
+        run: |
+          for script in scripts/0*.sh; do
+            bash -n "$script"
+          done
+      - name: Verify supplied input data
+        run: sha256sum -c inputs/checksums.sha256
