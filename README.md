@@ -1,4 +1,4 @@
-# Product release from chalcone synthase in deep eutectic solvents
+# Calculating the free energy profile for the release of the desired and byproduct
 
 ## Scientific background
 
@@ -16,29 +16,22 @@ activity. Experimental and simulation studies illustrate the importance of
 
 This project examines the solvent-dependent behavior of chalcone synthase
 (TaCHS). The implemented eutectic formulation is **hydrated choline chloride /
-ethylene glycol (ChCl:EG, 1:2)**, compared with water. It is described here as a
-DES; the broader NADES motivation does not establish a natural origin or a
-particular environmental profile for this formulation.
+ethylene glycol (ChCl:EG, 1:2)**, compared with water.
 
 ## Research question
 
-**Does solvent-dependent product selectivity arise primarily during the chemical
+**Does product promoscuity arise primarily during the chemical
 cyclization step, or can differences in product retention and release from the
-active site also contribute?**
+active site also contribute? second what would be the influence of solvent on the product release**
 
 We use umbrella sampling to investigate the free-energy profiles for releasing
 **p-coumaroyltriacetic acid lactone (CTAL)** and **naringenin chalcone (NC)** from
-the TaCHS active site toward bulk solvent. Naringenin chalcone is the canonical
-chalcone product; CTAL is a tetraketide-derived lactone associated with derailment
-from the productive pathway. Their distinct formation is supported by
-[experimental studies of CHS cyclization](https://pmc.ncbi.nlm.nih.gov/articles/PMC1221246/).
+the TaCHS active site toward bulk solvent. Naringenin chalcone is the desired product which will be converted to the naringenin, CTAL is the byproduct. 
 
 The working hypothesis is that solvent-dependent interactions with the enzyme
 and solvent may stabilize the bound products differently and alter their release
 profiles. The simulations estimate a potential of mean force (PMF) along a chosen
-release coordinate. They use fixed chemical topologies: **they do not simulate
-bond formation, CTAL/chalcone interconversion, or the chemical cyclization
-barrier**. A release PMF therefore addresses the release contribution to the
+release coordinate. A release PMF therefore addresses the release contribution to the
 question; identifying the controlling chemical step requires complementary
 reactive calculations or experimental kinetic evidence.
 
@@ -55,8 +48,7 @@ reactive calculations or experimental kinetic evidence.
 | `ctal_water` | CTAL | Water | 69,174 | Absolute Z component of COM separation |
 
 The pulled product is the second ligand in the dimer (atom IDs 12163–12194).
-The reference group is **Thr135 of chain B**, atom IDs 8199–8212. The other
-ligand remains in the simulation and is not assigned this pulling restraint.
+The reference group is **Thr135 of chain B**, atom IDs 8199–8212. 
 The DES index calls the second ligand `chlb` for both products; in the CTAL/DES
 structure these atoms are CTAL despite the historical group name.
 
@@ -287,26 +279,6 @@ Outputs in `analysis/chl_chcl_eg/RunI/wham_01/`:
 WHAM is described by [Hub et al. (2010)](https://doi.org/10.1021/ct100494z).
 Follow the [GROMACS WHAM guidance](https://manual.gromacs.org/documentation/2022/onlinehelp/gmx-wham.html)
 when assessing overlap, autocorrelation estimates and bootstrap uncertainty.
-
-## Interpreting the results
-
-Before drawing a conclusion about solvent-dependent release:
-
-1. Verify that the path connects the bound basin to a genuine bulk-solvent region
-   without interacting with periodic protein images.
-2. Check continuous histogram coverage and overlap between neighboring windows.
-3. Compare PMFs from different production intervals and independent repeat runs;
-   align their arbitrary energy offsets consistently.
-4. Assess whether slow solvent or protein motions require longer equilibration
-   or sampling, especially in the eutectic mixture.
-5. Use comparable coordinate definitions and appropriate geometric/restraint
-   corrections when comparing systems. The scripts report the raw coordinate
-   PMF; they do not apply a radial Jacobian or standard-state correction.
-
-A release PMF can identify bound basins and free-energy barriers along the chosen
-coordinate. Its raw endpoint difference is not automatically a standard binding
-free energy or a dissociation rate. Product-release energetics alone cannot
-establish the chemical origin of cyclization selectivity.
 
 ## Validation and reproducibility
 
