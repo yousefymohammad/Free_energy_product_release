@@ -29,7 +29,7 @@ cd "$OUTPUT"
 gmx grompp -f "$MDP/minimize.mdp" -c "$COORDINATES" -p "$TOPOLOGY" -o em.tpr
 gmx mdrun -deffnm em -v
 
-# 2. NVT: equilibrate temperature at 300.15 K with position restraints.
+# 2. NVT: equilibrate temperature at 300.15 K with position restraints. in the case of preparation in the presence of aqueous ChCl:EG, we used further step of preparation step 
 gmx grompp -f "$MDP/nvt.mdp" -c em.gro -r em.gro -p "$TOPOLOGY" -o nvt.tpr
 gmx mdrun -deffnm nvt -v
 
